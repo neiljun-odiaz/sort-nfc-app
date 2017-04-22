@@ -1,0 +1,11 @@
+.DS_Store
+node_modules/
+dist/
+npm-debug.log
+yarn-error.log
+.idea/
+server/vendor
+server/.idea
+server/Homestead.json
+server/Homestead.yaml
+server/.env
