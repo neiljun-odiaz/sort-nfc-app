@@ -34,28 +34,28 @@
         </div>
         <div class="column is-two-thirds">
             <div class="List">
-                    <table class="table is-striped is-bordered">
-                        <thead>
-                            <tr>
-                                <th>Card UID</th>
-                                <th>Store</th>
-                                <th>Batch Key</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(card, index) in cards">
-                                <td>{{ card.uid }}</td>
-                                <td>{{ card.store.name }}</td>
-                                <td>{{ card.batch_key }}</td>
-                                <td class="List__item--action">
-                                    <button class="button is-info is-small" @click.prevent="showUpdateModal(card, index)"><i class="fa fa-edit"></i></button>
-                                    <button class="button is-danger is-small" @click.prevent="showDeleteModal(card, index)"><i class="fa fa-trash-o"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table class="table is-striped is-bordered">
+                    <thead>
+                        <tr>
+                            <th>Card UID</th>
+                            <th>Store</th>
+                            <th>Batch Key</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(card, index) in cards">
+                            <td>{{ card.uid }}</td>
+                            <td>{{ card.store.name }}</td>
+                            <td>{{ card.batch_key }}</td>
+                            <td class="List__item--action">
+                                <button class="button is-info is-small" @click.prevent="showUpdateModal(card, index)"><i class="fa fa-edit"></i></button>
+                                <button class="button is-danger is-small" @click.prevent="showDeleteModal(card, index)"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>
