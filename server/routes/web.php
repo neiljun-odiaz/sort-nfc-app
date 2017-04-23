@@ -25,4 +25,6 @@ $app->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($app) 
     // Stores
     $app->get('store', 'StoreController@index');
     $app->post('store', 'StoreController@create');
+    $app->post('store/update', 'StoreController@update');
+    $app->post('store/delete', 'StoreController@destroy');
 });

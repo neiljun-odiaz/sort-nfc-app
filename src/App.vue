@@ -3,6 +3,10 @@
     <!-- <router-link to="/" tag="a">Home</router-link>
     <router-link to="/page1" tag="a">Page 1</router-link>
     <router-link to="/page2" tag="a">Page 2</router-link> -->
+    <div class="Header">
+        <h2><a href="" @click.prevent="$router.push('/')">Home</a></h2>
+    </div>
+    
     <router-view></router-view>
   </div>
 </template>

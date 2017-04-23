@@ -1,8 +1,7 @@
 <template>
     <div class="columns">
-        <div class="column is-4 is-offset-4">
-            <h2><a href="" @click.prevent="$router.push('/')">Home</a></h2>
-            <form action="" class="login-form">
+        <div class="column is-one-third">
+            <form action="" class="generic-form">
                 <div class="field">
                     <label class="label">Card ID</label>
                     <p class="control">
@@ -19,7 +18,7 @@
                     <label class="label">Store</label>
                     <p class="control">
                         <span class="select">
-                            <select v-model="store_id">
+                            <select v-model="store_id" required>
                                 <option value=""> Select a Store </option>
                                 <option v-for="store in stores" :value="store.id">{{store.name}}</option>
                             </select>
@@ -32,10 +31,31 @@
                     </p>
                 </div>
             </form>
-            <h2><strong>Card List</strong></h2>
-            <ul>
-                <li v-for="card in cards">{{card.uid}}</li>
-            </ul>
+        </div>
+        <div class="column is-two-thirds">
+            <div class="List">
+                    <table class="table is-striped is-bordered">
+                        <thead>
+                            <tr>
+                                <th>Card UID</th>
+                                <th>Store</th>
+                                <th>Batch Key</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(card, index) in cards">
+                                <td>{{ card.uid }}</td>
+                                <td>{{ card.store.name }}</td>
+                                <td>{{ card.batch_key }}</td>
+                                <td class="List__item--action">
+                                    <button class="button is-info is-small" @click.prevent="showUpdateModal(card, index)"><i class="fa fa-edit"></i></button>
+                                    <button class="button is-danger is-small" @click.prevent="showDeleteModal(card, index)"><i class="fa fa-trash-o"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
         </div>
     </div>
 </template>
@@ -83,17 +103,21 @@
             saveCard() {
                 let vm = this
                 let card_info = {
-                    uid: this.cardinfo.card_id,
-                    batch_key: this.batch_key,
-                    store_id: this.store_id,
+                    uid: vm.cardinfo.card_id,
+                    batch_key: vm.batch_key,
+                    store_id: vm.store_id,
+                }
+                if (!vm.store_id) {
+                    alert('Please select Store')
+                    return false
                 }
                 vm.$http.post('api/card', card_info).then((response) => {
-                    if (status.status == 200) {
-                        vm.cards.push({
-                            uid: vm.cardinfo.card_id,
-                            batch_key: vm.cardinfo.batch_key,
-                            store_id: vm.cardinfo.store_id,
-                        })
+                    if (response.status == 200) {
+                        if (response.data.result){
+                            vm.cards.push(response.data.card)
+                        } else {
+                            alert(response.data.message)
+                        }
                     }
                 }).catch(function (error) {
                     console.log(error);
@@ -120,6 +144,10 @@
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+
+        destroyed() {
+            this.$nfc.destroyCheck()
         }
     }
 </script>

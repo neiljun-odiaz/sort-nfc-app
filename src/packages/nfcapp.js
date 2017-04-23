@@ -131,6 +131,12 @@ export default function (Vue){
                 last_date_updated: '',
                 store_id: ''
             }
+        },
+
+        destroyCheck() {
+            VueNFC.resetCardInfo()
+            clearInterval(tag_checker)
+            clearInterval(long_tag_checker)
         }
 
     }
