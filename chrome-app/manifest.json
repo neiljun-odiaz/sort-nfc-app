@@ -1,5 +1,5 @@
 {
-  "name": "Vue-NFC Sample",
+  "name": "Admin Tools Sort App",
   "version": "0.1",
   "description": "chrome.nfc API with VueJS",
   "manifest_version": 2,

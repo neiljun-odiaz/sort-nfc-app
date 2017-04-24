@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Store;
+use App\Customer;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Card extends Model
@@ -14,5 +16,10 @@ class Card extends Model
     public function store()
     {
         return $this->belongsTo(Store::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
     }
 }
