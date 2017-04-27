@@ -92,6 +92,22 @@ class StoreController extends Controller
         return response($result);
     }
 
+    public function cards(Request $request)
+    {
+        $input = $request->all();
+        $store = Store::where('key', $input['store_key'])->first();
+        
+        if (empty($store)){
+            return response(array());
+        }
+
+        $store_id = $store->id;
+
+        // Get all cards from this store
+        $cards = Card::where('store_id', $store_id)->where('is_imported', false)->get();
+        return response($cards);
+    }
+
     private function checkKeyExist($key, $id='')
     {
         if (empty($id)){

@@ -71,6 +71,30 @@ class CardController extends Controller
         return response($result);
     }
 
+    public function result(Request $request)
+    {
+        try {
+            $cards = $request->all();
+            foreach ($cards as $card) {
+                $card_id = $card['id'];
+                $c_update = Card::find($card_id);
+                $c_update->is_imported = true;
+                $c_update->save();
+            }
+            $result = array(
+                    'result' => true,
+                    'message' => 'Card is_imported set to true.'
+                );
+        } catch(\Exception $e) {
+            $result = array(
+                    'result' => false,
+                    'message' => $e->getMessage()
+                );
+        }
+
+        return response($result);
+    }
+
     public function update(Request $request)
     {
 

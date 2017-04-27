@@ -1,7 +1,11 @@
 <template>
     <div>
-       <button class="button is-primary" @click.prevent="goTo('/card-pre-reg')">Card Pre-registration</button>
-       <button class="button is-primary" @click.prevent="goTo('/stores')">Stores</button>
+        <div class="columns is-mobile">
+            <div class="column is-one-half is-offset-one-quarter">
+               <button class="button is-primary" @click.prevent="goTo('/card-pre-reg')">Card Pre-registration</button>
+               <button class="button is-primary" @click.prevent="goTo('/stores')">Stores</button>
+            </div>
+       </div>
     </div>
 </template>
 <style>

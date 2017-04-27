@@ -11,10 +11,7 @@ export const store = new Vuex.Store({
             product_id: ''
         },
         card_info: {
-            user_id: '',
             card_id: '',
-            points: '',
-            last_date_updated: '',
             store_id: ''
         }
     }

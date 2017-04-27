@@ -1,6 +1,9 @@
 <template>
     <div class="columns">
         <div class="column is-one-third">
+            <div class="notification" :class="[reg_result ? 'is-success' : 'is-danger']" v-show="show_notif">
+                {{ reg_message }}
+            </div>
             <form action="" class="generic-form">
                 <div class="field">
                     <label class="label">Card ID</label>
@@ -69,7 +72,10 @@
                 store_id: '',
                 batch_key: '',
                 stores: [],
-                cards: []
+                cards: [],
+                show_notif: false,
+                reg_message: '',
+                reg_result: ''
             }
         },
 
@@ -111,16 +117,22 @@
                     alert('Please select Store')
                     return false
                 }
-                vm.$http.post('api/card', card_info).then((response) => {
+                vm.$http.post('card', card_info).then((response) => {
                     if (response.status == 200) {
                         if (response.data.result){
                             vm.cards.push(response.data.card)
+                            vm.reg_result = true
                         } else {
-                            alert(response.data.message)
+                            vm.reg_result = false
                         }
+                        vm.reg_message = response.data.message
+                        vm.show_notif = true
                     }
                 }).catch(function (error) {
                     console.log(error);
+                    vm.reg_result = false
+                    vm.reg_message = error
+                    vm.show_notif = true
                 });
             }
         },
@@ -129,7 +141,7 @@
             this.detectCard()
             this.batch_key = this.getBatchKey
 
-            this.$http.get('api/store').then((response) => {
+            this.$http.get('store').then((response) => {
                 if (response.status) {
                     this.stores = response.data
                 }
@@ -137,7 +149,7 @@
                 console.log(error);
             });
 
-            this.$http.get('api/card').then((response) => {
+            this.$http.get('card').then((response) => {
                 if (response.status) {
                     this.cards = response.data
                 }

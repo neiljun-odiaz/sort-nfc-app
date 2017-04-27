@@ -19,12 +19,14 @@ Vue.use(VueAxios, axios)
 Vue.use(NFCApp)
 Vue.use(Auth)
 
-axios.defaults.baseURL = 'http://localhost:9010'
+axios.defaults.baseURL = 'http://localhost:9010/api'
 
-if (Vue.auth.isAuthenticated()) {
-    let auth_token = JSON.parse(Vue.auth.getToken())
-    axios.defaults.headers.common['Authorization'] = auth_token.value
-}
+Vue.auth.isAuthenticated().then((result)=>{
+    if (result) {
+        let auth_token = JSON.parse(result)
+        axios.defaults.headers.common['Authorization'] = auth_token.value
+    }
+});
 
 const router = new VueRouter({
     routes: [
@@ -60,22 +62,17 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.forVisitor)) {
-        if (Vue.auth.isAuthenticated()) {
-            next({
-                path: '/'
-            })
-        } else {
-            next()
-        }
-    } else if (to.matched.some(record => record.meta.forAuth)) {
-        if (!Vue.auth.isAuthenticated()) {
-            next({
-                path: '/login'
-            })
-        } else {
-            next()
-        }
+    if (to.matched.some(record => record.meta.forAuth)) {
+        let is_auth = Vue.auth.isAuthenticated()
+        is_auth.then((result)=>{
+            if (!result) {
+                next({
+                    path: '/login'
+                })
+            } else {
+                next()
+            }
+        });
     } else {
         next()
     }

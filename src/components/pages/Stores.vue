@@ -164,7 +164,7 @@
 
             addStore() {
                 let store_info = this.store
-                this.$http.post('api/store', store_info).then((response) => {
+                this.$http.post('store', store_info).then((response) => {
                     if (response.status == 200) {
                         let response_body = response.data
                         if (response_body.result){
@@ -187,7 +187,7 @@
             updateStore() {
                 let store_info = this.store
                 let index = this.store_index
-                this.$http.post('api/store/update', store_info).then((response) => {
+                this.$http.post('store/update', store_info).then((response) => {
                     if (response.status == 200) {
                         let response_body = response.data
                         if (response_body.result){
@@ -205,7 +205,7 @@
             deleteStore() {
                 let store_info = this.temp_store
                 let index = this.store_index
-                this.$http.post('api/store/delete', store_info).then((response) => {
+                this.$http.post('store/delete', store_info).then((response) => {
                     if (response.status == 200) {
                         let response_body = response.data
                         if (response_body.result){
@@ -233,7 +233,7 @@
 
         created() {
             this.generateKey()
-            this.$http.get('api/store').then((response) => {
+            this.$http.get('store').then((response) => {
                 if (response.status) {
                     this.stores = response.data
                 }

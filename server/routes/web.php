@@ -15,7 +15,11 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
-$app->post('auth/login', 'UserController@login');
+$app->group(['prefix' => 'api'], function () use ($app) {
+    $app->post('auth/login', 'UserController@login');
+    $app->post('store/cards', 'StoreController@cards');
+    $app->post('cards/import-result', 'CardController@result');
+});
 
 $app->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($app) {
     // Cards
