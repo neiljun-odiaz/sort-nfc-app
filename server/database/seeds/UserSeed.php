@@ -13,7 +13,7 @@ class UserSeed extends Seeder
     {
         DB::table('users')->insert([
             'username' => 'sort_admin',
-            'password' => bcrypt('sort_@dmin'),
+            'password' => app('hash')->make('sort_@dmin'),
             'api_token' => str_random(40),
             'created_at' => Carbon\Carbon::now(),
             'updated_at' => Carbon\Carbon::now(),

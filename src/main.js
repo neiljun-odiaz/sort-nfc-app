@@ -6,7 +6,7 @@ import App from './App.vue'
 import {store} from './store.js'
 
 import Home from './components/pages/Home.vue'
-import Login from './components/pages/Login.vue'
+import Login from './components/auth/Login.vue'
 import CardPreReg from './components/pages/CardPreReg.vue'
 import Stores from './components/pages/Stores.vue'
 

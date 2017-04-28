@@ -63,19 +63,19 @@
                         <div class="field">
                             <label class="label">Store key</label>
                             <p class="control">
-                                <input class="input" type="text" v-model="store.key" maxlength="4">
+                                <input class="input" type="text" v-model="temp_store.key" maxlength="4">
                             </p>
                         </div>
                         <div class="field">
                             <label class="label">Store Name</label>
                             <p class="control">
-                                <input class="input" type="text" v-model="store.name">
+                                <input class="input" type="text" v-model="temp_store.name">
                             </p>
                         </div>
                         <div class="field">
                             <label class="label">Address</label>
                             <p class="control">
-                                <input class="input" type="text" v-model="store.address">
+                                <input class="input" type="text" v-model="temp_store.address">
                             </p>
                         </div>
                         <div class="field">
@@ -140,7 +140,7 @@
         methods: {
             showUpdateModal(store, index) {
                 this.isUpdating = true
-                this.store = store
+                this.temp_store = store
                 this.store_index = index
             },
 
@@ -158,6 +158,7 @@
                     name: '',
                     address: ''
                 }
+                this.temp_store = {}
                 this.store_index = ''
                 this.generateKey()
             },
