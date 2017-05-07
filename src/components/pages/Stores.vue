@@ -30,7 +30,7 @@
             </div>
             <div class="column is-two-thirds">
                 <div class="List">
-                    <table class="table is-striped is-bordered">
+                    <table class="table is-striped is-bordered is-narrow">
                         <thead>
                             <tr>
                                 <th>Store Key</th>

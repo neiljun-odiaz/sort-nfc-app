@@ -1,16 +1,10 @@
+import {store} from '../store.js'
+
 export default function(Vue) {
     let vm = this
     Vue.auth = {
         getToken() {
-            // let user_token = '{"value":"vKmDAcEBfUTVeRgqgEnsam1aSM90MGIRGuRGKqfw","expiration":1492785358022}'
             let user_token = ''
-
-            // Development
-            // user_token = localStorage.getItem('_token')
-            // if (!user_token)
-            //     return null
-            //
-            // return user_token
 
             return new Promise((resolve, reject) => {
                 chrome.storage.sync.get('_token', function (result) {
@@ -32,34 +26,31 @@ export default function(Vue) {
 
             return new Promise((resolve, reject) => {
                 chrome.storage.sync.set({'_token': JSON.stringify(user_token)}, function(e){
-                    console.log(e)
+                    console.log( JSON.stringify(user_token) )
                     resolve(user_token);
                 });
             });
+        },
 
-            // Development
-            // localStorage.setItem('_token', JSON.stringify(user_token))
+        removeToken() {
+            let logout = true
+            return new Promise((resolve, reject) => {
+                chrome.storage.sync.remove('_token', function(e){
+                    console.log('Logged out!');
+                    resolve(logout);
+                });
+            });
         },
 
         isAuthenticated() {
             let user_token = ''
-            /*
-            // Check if token is set
-            if (!user_token)
-                return false
-
-            let toke_expiry = user_token.expiration
-            let timenow = new Date().getTime()
-
-            // Check if token is expired
-            if (toke_expiry < timenow)
-                return false*/
 
             return new Promise((resolve, reject) => {
                 chrome.storage.sync.get('_token', function (result) {
                     let len = Object.keys(result).length
                     if (!len) {
                         console.log('No token')
+                        store.state.isAuth = false
                         reject(false);
                     } else {
                         user_token = result._token;
@@ -70,6 +61,7 @@ export default function(Vue) {
                             if (toke_expiry < timenow)
                                 reject(false);
 
+                            store.state.isAuth = true
                             resolve(user_token);
                         } else {
                             reject(false);

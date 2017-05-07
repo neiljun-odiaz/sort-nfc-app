@@ -1,9 +1,16 @@
 <template>
     <div>
-        <div class="columns is-mobile">
-            <div class="column is-one-half is-offset-one-quarter">
-               <button class="button is-primary" @click.prevent="goTo('/card-pre-reg')">Card Pre-registration</button>
-               <button class="button is-primary" @click.prevent="goTo('/stores')">Stores</button>
+        <div class="columns is-mobile is-centered">
+            <div class="column has-text-centered">
+                <div class="section">
+                    <div class="page-buttons" @click.prevent="goTo('/card-pre-reg')">
+                        <p>Card Pre-Registration</p>
+                    </div>
+                    <div class="page-buttons" @click.prevent="goTo('/stores')">
+                        <p>Store List</p>
+                    </div>
+
+                </div>
             </div>
        </div>
     </div>

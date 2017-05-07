@@ -1,15 +1,46 @@
 @import url(./normalize.css);
 @import url(./bulma.css);
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.Header {
+    padding: 0.5em 0em;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 40px;
+}
+.body-container {
+    padding: 0.5rem 0.75rem;
+}
 .login-form {
     margin-top: 3em;
 }
-.app-content {
-    
-}
-.Header {
-    padding: 2em 1em;
-}
 .generic-form {
-    padding: 0 1em;
+    padding: 0em;
+}
+.section .page-buttons {
+    display: inline-flex;
+    width: 200px;
+    height: 170px;
+    margin: 15px;
+    border: 1px solid;
+    justify-content: center;
+    align-items: center;
+    background-color: #00d1b2;
+    border-color: transparent;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    vertical-align: top;
+    padding: 15px;
+}
+.section .page-buttons p {
+    margin: 0 auto;
+    padding: 0;
+    font-size: 1.4em;
+}
+.section .page-buttons:hover {
+    background-color: #06af96;
 }

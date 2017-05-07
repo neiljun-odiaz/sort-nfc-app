@@ -10,9 +10,17 @@ export const store = new Vuex.Store({
             vendor_id: '',
             product_id: ''
         },
+
+        isAuth: false,
+
+        // {points};{amount};{timestamp};{storeid};{expiry}
         card_info: {
-            card_id: '',
-            store_id: ''
+            tag_id: '',
+            points: '',
+            amount: '',
+            last_updated: '',
+            store_id: '',
+            expiry: ''
         }
     }
 })
