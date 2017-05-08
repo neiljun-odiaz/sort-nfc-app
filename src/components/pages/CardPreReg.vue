@@ -28,6 +28,9 @@
                         </span>
                     </p>
                 </div>
+                <div class="field auto-save-field">
+                    <input type="checkbox" class="checkbox" id="autosave" v-model="autosave" /><label for="autosave"><strong>Auto Save</strong></label>
+                </div>
                 <div class="field">
                     <p class="control">
                         <button class="button is-primary" @click.prevent="saveCard">Pre-Register Card</button>
@@ -63,7 +66,17 @@
     </div>
 </template>
 <style>
-    
+    .auto-save-field {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .auto-save-field .checkbox {
+        margin-right: 7px;
+    }
+    .auto-save-field label {
+        cursor: pointer;
+    }
 </style>
 <script>
     export default {
@@ -75,7 +88,9 @@
                 cards: [],
                 show_notif: false,
                 reg_message: '',
-                reg_result: ''
+                reg_result: '',
+                autosave: false,
+                tmp_tag_id: '0000000'
             }
         },
 
@@ -114,7 +129,7 @@
                     store_id: vm.store_id,
                 }
                 if (!vm.store_id) {
-                    alert('Please select Store')
+                    console.log('Please select Store')
                     return false
                 }
                 vm.$http.post('card', card_info).then((response) => {
@@ -134,6 +149,20 @@
                     vm.reg_message = error
                     vm.show_notif = true
                 });
+            }
+        },
+
+        watch: {
+            cardinfo() {
+                let tag_id = this.$store.state.card_info.card_id
+                if (tag_id !== "" && this.tmp_tag_id !== tag_id){
+                    this.tmp_tag_id = tag_id
+                    if (this.autosave) {
+                        // Perform Auto Save
+                        this.saveCard()
+                    }
+                }
+
             }
         },
 

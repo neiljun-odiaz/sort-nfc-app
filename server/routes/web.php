@@ -21,7 +21,8 @@ $app->group(['prefix' => 'api'], function () use ($app) {
     $app->post('cards/import-result', 'CardController@result');
 });
 
-$app->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($app) {
+// $app->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($app) {
+$app->group(['prefix' => 'api'], function () use ($app) {
     // Cards
     $app->post('card', 'CardController@create');
     $app->get('card', 'CardController@index');

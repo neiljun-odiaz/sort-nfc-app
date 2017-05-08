@@ -108,13 +108,13 @@ export default function (Vue){
         runTagChecker () {
             setTimeout(function(){ 
                 VueNFC.readNdefTag(); 
-            }, 500);
+            }, 400);
         },
 
         runLongTagChecker() {
             long_tag_checker = setInterval(function () {
                 VueNFC.readNdefTag()
-            }, 1000);
+            }, 800);
         },
 
         checkTagDetected () {

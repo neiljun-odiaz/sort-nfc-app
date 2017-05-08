@@ -21,12 +21,12 @@ Vue.use(Auth)
 
 axios.defaults.baseURL = 'http://localhost:9010/api'
 
-Vue.auth.isAuthenticated().then((result)=>{
-    if (result) {
-        let auth_token = JSON.parse(result)
-        axios.defaults.headers.common['Authorization'] = auth_token.value
-    }
-});
+// Vue.auth.isAuthenticated().then((result)=>{
+//     if (result) {
+//         let auth_token = JSON.parse(result)
+//         axios.defaults.headers.common['Authorization'] = auth_token.value
+//     }
+// });
 
 const router = new VueRouter({
     routes: [
@@ -61,22 +61,22 @@ const router = new VueRouter({
     ]
 })
 
-router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.forAuth)) {
-        let is_auth = Vue.auth.isAuthenticated()
-        is_auth.then((result)=>{
-            if (!result) {
-                next({
-                    path: '/login'
-                })
-            } else {
-                next()
-            }
-        });
-    } else {
-        next()
-    }
-})
+// router.beforeEach((to, from, next) => {
+//     if (to.matched.some(record => record.meta.forAuth)) {
+//         let is_auth = Vue.auth.isAuthenticated()
+//         is_auth.then((result)=>{
+//             if (!result) {
+//                 next({
+//                     path: '/login'
+//                 })
+//             } else {
+//                 next()
+//             }
+//         });
+//     } else {
+//         next()
+//     }
+// })
 
 new Vue({
     el: '#app',
